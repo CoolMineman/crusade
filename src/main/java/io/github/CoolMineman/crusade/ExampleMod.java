@@ -1,4 +1,4 @@
-package net.fabricmc.example;
+package io.github.CoolMineman.crusade;
 
 import net.fabricmc.api.ModInitializer;
 
