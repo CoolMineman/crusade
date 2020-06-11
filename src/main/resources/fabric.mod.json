@@ -1,35 +1,35 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "crusade",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Crudade Mod",
+  "description": "D E U S   V U L T!",
   "authors": [
-    "Me!"
+    "CoolMineman/ThatTrollzer/Cool_Mineman/Whatever I am now ;P"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "N O",
+    "sources": "https://github.com/CoolMineman/crusade"
   },
 
-  "license": "CC0-1.0",
+  "license": "G N U   V U L T (LGPL v3)",
   "icon": "assets/modid/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "io.github.CoolMineman.CrusadeMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "crusade.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.4",
+    "fabricloader": "*",
     "fabric": "*",
-    "minecraft": "1.15.x"
+    "minecraft": "*"
   },
   "suggests": {
     "flamingo": "*"
