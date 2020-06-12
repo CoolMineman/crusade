@@ -4,6 +4,8 @@
   "package": "io.github.CoolMineman.crusade.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "PlayerEntityMixin",
+    "LivingEntityOpener"
   ],
   "client": [
     "ExampleMixin",

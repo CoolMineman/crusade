@@ -18,16 +18,30 @@ public class HandRenderMixin {
         //todo Other mobs?
         if (!(livingEntity instanceof PlayerEntity))
             return;
-        if (((PlayerEntity)livingEntity).getMainArm() == Arm.RIGHT) {
-            if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getMainHandStack().getItem()))
-                ((BipedEntityModel)(Object)this).rightArm.pitch = 0.2F;
-            if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getOffHandStack().getItem()))
-                ((BipedEntityModel)(Object)this).leftArm.pitch = 0.2F;
+        if (((PlayerEntity)livingEntity).hasVehicle()) {
+            if (((PlayerEntity)livingEntity).getMainArm() == Arm.RIGHT) {
+                if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getMainHandStack().getItem()))
+                    ((BipedEntityModel)(Object)this).rightArm.pitch = 0.2F;
+                if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getOffHandStack().getItem()))
+                    ((BipedEntityModel)(Object)this).leftArm.pitch = 0.2F;
+            } else {
+                if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getMainHandStack().getItem()))
+                    ((BipedEntityModel)(Object)this).leftArm.pitch = 0.2F;
+                if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getOffHandStack().getItem()))
+                    ((BipedEntityModel)(Object)this).rightArm.pitch = 0.2F;
+            }
         } else {
-            if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getMainHandStack().getItem()))
-                ((BipedEntityModel)(Object)this).leftArm.pitch = 0.2F;
-            if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getOffHandStack().getItem()))
-                ((BipedEntityModel)(Object)this).rightArm.pitch = 0.2F;
+            if (((PlayerEntity)livingEntity).getMainArm() == Arm.RIGHT) {
+                if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getMainHandStack().getItem()))
+                    ((BipedEntityModel)(Object)this).rightArm.pitch = -1.5F;
+                if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getOffHandStack().getItem()))
+                    ((BipedEntityModel)(Object)this).leftArm.pitch = -1.5F;
+            } else {
+                if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getMainHandStack().getItem()))
+                    ((BipedEntityModel)(Object)this).leftArm.pitch = -1.5F;
+                if (CrusadeMod.LANCES.contains(((PlayerEntity)livingEntity).getOffHandStack().getItem()))
+                    ((BipedEntityModel)(Object)this).rightArm.pitch = -1.5F;
+            }
         }
     }
 }
