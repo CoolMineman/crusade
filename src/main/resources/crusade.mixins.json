@@ -7,7 +7,8 @@
   ],
   "client": [
     "ExampleMixin",
-    "Savemefromthisdirtyhack"
+    "Savemefromthisdirtyhack",
+    "HandRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
