@@ -1,7 +1,10 @@
 {
     "variants": {
-        "": {
+        "epic=true": {
             "model": "crusade:block/trebuchet_base"
+        },
+        "epic=false": {
+            "model": "block/barrier"
         }
     }
 }

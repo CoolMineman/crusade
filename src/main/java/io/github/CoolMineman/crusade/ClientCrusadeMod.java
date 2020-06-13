@@ -9,7 +9,7 @@ import net.minecraft.client.render.RenderLayer;
 public class ClientCrusadeMod implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        BlockRenderLayerMap.INSTANCE.putBlock(CrusadeMod.TREBUCHET_BASE, RenderLayer.getTranslucent());
+        //BlockRenderLayerMap.INSTANCE.putBlock(CrusadeMod.TREBUCHET_BASE, RenderLayer.getTranslucent());
         BlockEntityRendererRegistry.INSTANCE.register(CrusadeMod.TREBUCHET_ENTITY, TrebuchetRenderer::new);
     }
 }
