@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "WWW",
+        "WIW"
+    ],
+    "key": {
+        "W": {
+            "item": "iron_ingot"
+        },
+        "I": {
+            "item": "iron_helmet"
+        }
+    },
+    "result": {
+        "item": "crusade:great_helm",
+        "count": 1
+    }
+}

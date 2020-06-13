@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " M ",
+        " I ",
+        " I "
+    ],
+    "key": {
+        "M": {
+            "item": "diamond_sword"
+        },
+        "I": {
+            "item": "stick"
+        }
+    },
+    "result": {
+        "item": "crusade:diamond_lance",
+        "count": 1
+    }
+}
