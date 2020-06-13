@@ -2,7 +2,13 @@ package io.github.CoolMineman.crusade;
 
 import java.util.ArrayList;
 
+import io.github.CoolMineman.crusade.trebuchet.BaseTrebuchetBlock;
+import io.github.CoolMineman.crusade.trebuchet.TrebuchetBlockEntity;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.block.Block;
+import net.minecraft.block.Material;
+import net.minecraft.block.AbstractBlock.Settings;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
@@ -28,6 +34,9 @@ public class CrusadeMod implements ModInitializer {
 		LANCES.add(NETHERITE_LANCE);
 	}
 
+	public static final Block TREBUCHET_BASE = new BaseTrebuchetBlock(Settings.of(Material.METAL));
+	public static BlockEntityType<TrebuchetBlockEntity> TREBUCHET_ENTITY;
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -39,6 +48,9 @@ public class CrusadeMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier("crusade", "iron_lance"), IRON_LANCE);
 		Registry.register(Registry.ITEM, new Identifier("crusade", "diamond_lance"), DIAMOND_LANCE);
 		Registry.register(Registry.ITEM, new Identifier("crusade", "netherite_lance"), NETHERITE_LANCE);
+
+		Registry.register(Registry.BLOCK, new Identifier("crusade", "dontusethisitisinternal1"), TREBUCHET_BASE);
+		TREBUCHET_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "crusade:dontusethisitisinternal1", BlockEntityType.Builder.create(TrebuchetBlockEntity::new, TREBUCHET_BASE).build(null));
 		System.out.println("Hello Fabric world!");
 	}
 }

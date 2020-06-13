@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "io.github.CoolMineman.crusade.CrusadeMod"
+    ],
+    "client": [
+      "io.github.CoolMineman.crusade.ClientCrusadeMod"
     ]
   },
   "mixins": [
