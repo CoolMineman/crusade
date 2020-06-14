@@ -28,7 +28,7 @@ public class TrebuchetRenderer extends BlockEntityRenderer<TrebuchetBlockEntity>
  
     @Override
     public void render(TrebuchetBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        int renderDirection = 2;
+        int renderDirection = 0;
         //0 = legs south
         //1 = legs east
         //2 = legs west

@@ -4,12 +4,19 @@ import java.util.ArrayList;
 
 import io.github.CoolMineman.crusade.trebuchet.BaseTrebuchetBlock;
 import io.github.CoolMineman.crusade.trebuchet.TrebuchetBlockEntity;
+import io.github.CoolMineman.crusade.trebuchet.TrebuchetProjectile;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -39,6 +46,12 @@ public class CrusadeMod implements ModInitializer {
 	public static final Block TREBUCHET_BASE = new BaseTrebuchetBlock(Settings.of(Material.METAL));
 	public static BlockEntityType<TrebuchetBlockEntity> TREBUCHET_ENTITY;
 
+	public static final EntityType<TrebuchetProjectile> TREBUCHET_PROJECTILE = Registry.register(
+		Registry.ENTITY_TYPE,
+		new Identifier("crusade", "trebuchet_projectile"),
+		FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TrebuchetProjectile::new).dimensions(EntityDimensions.fixed(1f, 1f)).build()
+	);
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -55,6 +68,7 @@ public class CrusadeMod implements ModInitializer {
 
 		Registry.register(Registry.BLOCK, new Identifier("crusade", "dontusethisitisinternal1"), TREBUCHET_BASE);
 		TREBUCHET_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "crusade:dontusethisitisinternal1", BlockEntityType.Builder.create(TrebuchetBlockEntity::new, TREBUCHET_BASE).build(null));
+		FabricDefaultAttributeRegistry.register(TREBUCHET_PROJECTILE, MobEntity.createMobAttributes());
 		System.out.println("Hello Fabric world!");
 	}
 }
