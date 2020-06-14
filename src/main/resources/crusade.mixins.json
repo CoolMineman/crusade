@@ -10,7 +10,8 @@
   "client": [
     "ExampleMixin",
     "Savemefromthisdirtyhack",
-    "HandRenderMixin"
+    "HandRenderMixin",
+    "ModelElementMixin"
   ],
   "injectors": {
     "defaultRequire": 1

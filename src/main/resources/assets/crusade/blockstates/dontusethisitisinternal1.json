@@ -1,9 +1,24 @@
 {
     "variants": {
-        "epic=true": {
-            "model": "crusade:block/trebuchet_base"
+        "epic=1": {
+            "model": "crusade:block/trebuchetbase0"
         },
-        "epic=false": {
+        "epic=2": {
+            "model": "crusade:block/trebuchetbase1"
+        },
+        "epic=3": {
+            "model": "crusade:block/trebuchetbase2"
+        },
+        "epic=4": {
+            "model": "crusade:block/trebuchetbase3"
+        },
+        "epic=5": {
+            "model": "crusade:block/trebuchetbase4"
+        },
+        "epic=6": {
+            "model": "crusade:block/trebuchetbase5"
+        },
+        "epic=0": {
             "model": "block/barrier"
         }
     }

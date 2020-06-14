@@ -25,6 +25,8 @@ public class CrusadeMod implements ModInitializer {
 	public static final Item DIAMOND_LANCE = new LanceItem(ToolMaterials.DIAMOND, 4, 0, new Item.Settings().group(ItemGroup.MISC));
 	public static final Item NETHERITE_LANCE = new LanceItem(ToolMaterials.NETHERITE, 4, 0, new Item.Settings().group(ItemGroup.MISC));
 
+	public static final Item TREBUCHET_ARM = new Item(new Item.Settings());
+
 	public static ArrayList<Item> LANCES = new ArrayList<>();
 	static {
 		LANCES.add(WOOD_LANCE);
@@ -48,6 +50,8 @@ public class CrusadeMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier("crusade", "iron_lance"), IRON_LANCE);
 		Registry.register(Registry.ITEM, new Identifier("crusade", "diamond_lance"), DIAMOND_LANCE);
 		Registry.register(Registry.ITEM, new Identifier("crusade", "netherite_lance"), NETHERITE_LANCE);
+
+		Registry.register(Registry.ITEM, new Identifier("crusade", "zzzzinternalzzztrebuchet_arm"), TREBUCHET_ARM);
 
 		Registry.register(Registry.BLOCK, new Identifier("crusade", "dontusethisitisinternal1"), TREBUCHET_BASE);
 		TREBUCHET_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "crusade:dontusethisitisinternal1", BlockEntityType.Builder.create(TrebuchetBlockEntity::new, TREBUCHET_BASE).build(null));

@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "block/oak_planks",
-		"particle": "block/oak_planks"
+		"0": "Downloads/oak_planks",
+		"particle": "Downloads/oak_planks"
 	},
 	"elements": [
 		{
@@ -34,7 +34,7 @@
 			"name": "arm",
 			"from": [7, 12.5, -8.5],
 			"to": [8, 44.5, -7.5],
-			"rotation": {"angle": 0, "axis": "x", "origin": [7.5, 20.5, -8]},
+			"rotation": {"angle": 45, "axis": "x", "origin": [7.5, 20.5, -8]},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 1], "rotation": 180, "texture": "#0"},
 				"east": {"uv": [0, 0, 16, 1], "rotation": 90, "texture": "#0"},

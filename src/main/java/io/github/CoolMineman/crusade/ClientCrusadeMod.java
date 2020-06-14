@@ -1,5 +1,6 @@
 package io.github.CoolMineman.crusade;
 
+import io.github.CoolMineman.crusade.trebuchet.CursedModelGenerator;
 import io.github.CoolMineman.crusade.trebuchet.TrebuchetRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -11,5 +12,6 @@ public class ClientCrusadeMod implements ClientModInitializer {
     public void onInitializeClient() {
         //BlockRenderLayerMap.INSTANCE.putBlock(CrusadeMod.TREBUCHET_BASE, RenderLayer.getTranslucent());
         BlockEntityRendererRegistry.INSTANCE.register(CrusadeMod.TREBUCHET_ENTITY, TrebuchetRenderer::new);
+        CursedModelGenerator.doTheCursed();
     }
 }
