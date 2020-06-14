@@ -50,8 +50,7 @@ public class TrebuchetRenderer extends BlockEntityRenderer<TrebuchetBlockEntity>
         matrices.translate(-3.25, 0, -3f);
         matrices.scale(7.5f, 7.5f, 7.5f);
         int lightAbove = WorldRenderer.getLightmapCoordinates(blockEntity.getWorld(), blockEntity.getPos().up());
-        int q = ((int)blockEntity.getWorld().getTime()/2) % 12;
-        //int q = 5;
+        int q = blockEntity.armState;
         if (q > 5) q = 5;
         MinecraftClient.getInstance().getBlockRenderManager().renderBlockAsEntity(bases[q], matrices, vertexConsumers, lightAbove, overlay);
         matrices.pop();
