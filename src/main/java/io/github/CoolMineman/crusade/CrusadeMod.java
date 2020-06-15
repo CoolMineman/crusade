@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import io.github.CoolMineman.crusade.trebuchet.BaseTrebuchetBlock;
 import io.github.CoolMineman.crusade.trebuchet.TrebuchetBlockEntity;
+import io.github.CoolMineman.crusade.trebuchet.TrebuchetItem;
 import io.github.CoolMineman.crusade.trebuchet.TrebuchetProjectile;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -32,7 +33,6 @@ public class CrusadeMod implements ModInitializer {
 	public static final Item DIAMOND_LANCE = new LanceItem(ToolMaterials.DIAMOND, 4, 0, new Item.Settings().group(ItemGroup.MISC));
 	public static final Item NETHERITE_LANCE = new LanceItem(ToolMaterials.NETHERITE, 4, 0, new Item.Settings().group(ItemGroup.MISC));
 
-	public static final Item TREBUCHET_ARM = new Item(new Item.Settings());
 
 	public static ArrayList<Item> LANCES = new ArrayList<>();
 	static {
@@ -45,6 +45,9 @@ public class CrusadeMod implements ModInitializer {
 
 	public static final Block TREBUCHET_BASE = new BaseTrebuchetBlock(Settings.of(Material.METAL));
 	public static BlockEntityType<TrebuchetBlockEntity> TREBUCHET_ENTITY;
+
+
+	public static final Item TREBUCHET_ITEM = new TrebuchetItem(TREBUCHET_BASE, new Item.Settings().group(ItemGroup.MISC));
 
 	public static final EntityType<TrebuchetProjectile> TREBUCHET_PROJECTILE = Registry.register(
 		Registry.ENTITY_TYPE,
@@ -64,11 +67,11 @@ public class CrusadeMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier("crusade", "diamond_lance"), DIAMOND_LANCE);
 		Registry.register(Registry.ITEM, new Identifier("crusade", "netherite_lance"), NETHERITE_LANCE);
 
-		Registry.register(Registry.ITEM, new Identifier("crusade", "zzzzinternalzzztrebuchet_arm"), TREBUCHET_ARM);
+		Registry.register(Registry.ITEM, new Identifier("crusade", "trebuchet"), TREBUCHET_ITEM);
 
 		Registry.register(Registry.BLOCK, new Identifier("crusade", "dontusethisitisinternal1"), TREBUCHET_BASE);
 		TREBUCHET_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "crusade:dontusethisitisinternal1", BlockEntityType.Builder.create(TrebuchetBlockEntity::new, TREBUCHET_BASE).build(null));
 		FabricDefaultAttributeRegistry.register(TREBUCHET_PROJECTILE, MobEntity.createMobAttributes());
-		System.out.println("Hello Fabric world!");
+		System.out.println("DEUS VULT!");
 	}
 }

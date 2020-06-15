@@ -43,6 +43,10 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
         BlockEntity be = world.getBlockEntity(pos);
         if (be!=null && be instanceof TrebuchetBlockEntity) {
             TrebuchetBlockEntity blockEntity = (TrebuchetBlockEntity)be;
+
+            //Don't spawn add new entity if it is already throwing
+            if (blockEntity.armState != 0) return ActionResult.PASS;
+
             if (player.getMainHandStack().isEmpty()) {
                 blockEntity.hasEntityToThrow = true;
                 blockEntity.entityToThrow = player.getUuid();
@@ -52,7 +56,6 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
                 if (!(a.equals(Fluids.EMPTY))) {
                     Entity e = new FallingBlockEntity(world, pos.getX(), pos.getY() + 5, pos.getZ(), a.getDefaultState().getBlockState());
                     world.spawnEntity(e);
-                    System.out.println(e);
                     blockEntity.hasEntityToThrow = true;
                     blockEntity.entityToThrow = e.getUuid();
                 }
@@ -60,12 +63,11 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
                 Block a = ((BlockItem)player.getMainHandStack().getItem()).getBlock();
                 TrebuchetProjectile e = new TrebuchetProjectile(CrusadeMod.TREBUCHET_PROJECTILE, world);
                 e.setTheBlockState(a.getDefaultState());
-                e.setPos(be.getPos().getX(), -5, be.getPos().getZ());
-                System.out.println(world);
-                System.out.println(world.spawnEntity(e));
+                e.setPos(be.getPos().getX(), -5, be.getPos().getZ()); //Hacky Code To Make Enitity exist
+                world.spawnEntity(e);
                 blockEntity.hasEntityToThrow = true;
                 blockEntity.entityToThrow = e.getUuid();
-                System.out.println(((ServerWorld)world).getEntity(e.getUuid()));
+                player.getMainHandStack().decrement(1);
             }
         } else {
             System.out.println(":irritater:");

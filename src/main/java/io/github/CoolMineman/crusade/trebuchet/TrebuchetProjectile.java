@@ -13,8 +13,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 
 public class TrebuchetProjectile extends MobEntityWithAi {
+    private boolean hasExploaded = false;
     //NOT OPTIONAL
     private static final TrackedData<Optional<BlockState>> BLOCK = DataTracker.registerData(TrebuchetProjectile.class, TrackedDataHandlerRegistry.OPTIONAL_BLOCK_STATE);
 
@@ -46,5 +48,14 @@ public class TrebuchetProjectile extends MobEntityWithAi {
     protected void initDataTracker() {
         super.initDataTracker();
         dataTracker.startTracking(BLOCK, Optional.of(Blocks.AIR.getDefaultState()));
+    }
+
+    @Override
+    protected void updatePostDeath() {
+        super.updatePostDeath();
+        if (!hasExploaded && !world.isClient) {
+            this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 2.0F, Explosion.DestructionType.BREAK);
+            this.hasExploaded = true;
+        }
     }
 }
