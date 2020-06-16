@@ -6,6 +6,12 @@ D E U S   V U L T
 
 For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using (must be VSCode or else).
 
+## About
+
+![Crusade Logo](CoolMineman.github.io/crusade/logo.png)
+
+Crusade is a Minecraft mod that adds many new medieval themed weapons and gear. It adds a **fully functional trebuchet** that can throw any Minecraft block, even modded blocks, and new lance weapons that work on all ridable entities.
+
 ## License
 
 GNU VULT!

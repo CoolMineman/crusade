@@ -53,9 +53,13 @@ public class TrebuchetProjectile extends MobEntityWithAi {
     @Override
     protected void updatePostDeath() {
         super.updatePostDeath();
-        if (!hasExploaded && !world.isClient) {
-            this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 2.0F, Explosion.DestructionType.BREAK);
-            this.hasExploaded = true;
+        if (!world.isClient) {
+            if (!hasExploaded) {
+                this.world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 2.0F, Explosion.DestructionType.BREAK);
+                this.hasExploaded = true;
+            } else if ((this.deathTime == 20) && (world.getBlockState(this.getBlockPos()).getHardness(world, this.getBlockPos()) <= 50)) {
+                    world.setBlockState(this.getBlockPos(), getTheBlockState());
+            }
         }
     }
 }

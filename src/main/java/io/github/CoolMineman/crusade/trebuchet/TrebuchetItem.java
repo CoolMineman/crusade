@@ -23,11 +23,10 @@ public class TrebuchetItem extends BlockItem {
         return super.place(context);
     }
 
-    
     @Override
     protected boolean postPlacement(BlockPos pos, World world, PlayerEntity player, ItemStack stack, BlockState state) {
         boolean b = super.postPlacement(pos, world, player, stack, state);
-        TrebuchetBlockEntity be = (TrebuchetBlockEntity)world.getBlockEntity(pos);
+        TrebuchetBlockEntity be = (TrebuchetBlockEntity) world.getBlockEntity(pos);
         switch (context.getPlayerFacing()) {
             case DOWN:
                 break;
@@ -50,5 +49,10 @@ public class TrebuchetItem extends BlockItem {
 
         }
         return b;
+    }
+
+    @Override
+    public String getTranslationKey() {
+        return this.getOrCreateTranslationKey();
     }
 }
