@@ -19,7 +19,7 @@
             "model": "crusade:block/trebuchetbase5"
         },
         "epic=0": {
-            "model": "block/barrier"
+            "model": "crusade:block/trebuchet_loading_zone"
         }
     }
 }

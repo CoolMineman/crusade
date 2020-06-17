@@ -2,10 +2,13 @@ package io.github.CoolMineman.crusade.trebuchet;
 
 import java.util.UUID;
 
+import com.mojang.datafixers.optics.Lens.Box;
+
 import io.github.CoolMineman.crusade.CrusadeMod;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
@@ -15,10 +18,11 @@ import net.minecraft.util.Tickable;
 import net.minecraft.util.math.Vec3d;
 
 public class TrebuchetBlockEntity extends BlockEntity implements Tickable, BlockEntityClientSerializable {
-    private static final Double[][] entityLocationCacheXY = {{4d, 6d}, {4d, 10d}, {3d, 14d}, {1d, 17.5d}, {-3d, 19d}, {-6.5d, 21d}, }; 
+    private static final Double[][] entityLocationCacheXY = { { 4d, 6d }, { 4d, 10d }, { 3d, 14d }, { 1d, 17.5d },
+            { -3d, 19d }, { -6.5d, 21d }, };
 
     public int armState = 0;
-    //see TrebuchetRenderer
+    // see TrebuchetRenderer
     public int placementDirection = 0;
     public boolean hasEntityToThrow = false;
     public UUID entityToThrow = null;
@@ -44,7 +48,7 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
 
     // Deserialize the BlockEntity
     @Override
-    public void fromTag(BlockState state,CompoundTag tag) {
+    public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
         armState = tag.getInt("armState");
         placementDirection = tag.getInt("placementDirection");
@@ -56,9 +60,11 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
     }
 
     int tickCounter = 0;
+
     @Override
     public void tick() {
-        if (!(this.world instanceof ServerWorld)) return;
+        if (!(this.world instanceof ServerWorld))
+            return;
 
         switch (tickCounter) {
             case 1:
@@ -111,7 +117,7 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
 
         if (hasEntityToThrow) {
             System.out.println(this.world);
-            Entity e = (((ServerWorld)this.world).getEntity(entityToThrow));
+            Entity e = (((ServerWorld) this.world).getEntity(entityToThrow));
             if (e != null) {
                 updateEntity(e);
                 tickCounter++;
@@ -126,26 +132,30 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
 
     private void updateEntity(Entity e) {
         if (placementDirection == 0) {
-            e.updatePosition(this.pos.getX() + 0.25, this.pos.getY() + entityLocationCacheXY[armState][1], this.pos.getZ() + entityLocationCacheXY[armState][0]);
+            e.updatePosition(this.pos.getX() + 0.25, this.pos.getY() + entityLocationCacheXY[armState][1],
+                    this.pos.getZ() + entityLocationCacheXY[armState][0]);
         } else if (placementDirection == 1) {
-            e.updatePosition(this.pos.getX() + entityLocationCacheXY[armState][0], this.pos.getY() + entityLocationCacheXY[armState][1], this.pos.getZ() + 0.75);
+            e.updatePosition(this.pos.getX() + entityLocationCacheXY[armState][0],
+                    this.pos.getY() + entityLocationCacheXY[armState][1], this.pos.getZ() + 0.75);
         } else if (placementDirection == 2) {
-            e.updatePosition(this.pos.getX() - entityLocationCacheXY[armState][0] + 1, this.pos.getY() + entityLocationCacheXY[armState][1], this.pos.getZ() + 0.25);
+            e.updatePosition(this.pos.getX() - entityLocationCacheXY[armState][0] + 1,
+                    this.pos.getY() + entityLocationCacheXY[armState][1], this.pos.getZ() + 0.25);
         } else if (placementDirection == 3) {
-            e.updatePosition(this.pos.getX() + 0.25, this.pos.getY() + entityLocationCacheXY[armState][1], this.pos.getZ() - entityLocationCacheXY[armState][0] + 1);
+            e.updatePosition(this.pos.getX() + 0.25, this.pos.getY() + entityLocationCacheXY[armState][1],
+                    this.pos.getZ() - entityLocationCacheXY[armState][0] + 1);
         }
-        
-        
+
         System.out.println(e);
-        
+
         if (e instanceof ServerPlayerEntity) {
-            ((ServerPlayerEntity)e).networkHandler.requestTeleport(e.getX(), e.getY(), e.getZ(), 0f, 0f);
+            ((ServerPlayerEntity) e).networkHandler.requestTeleport(e.getX(), e.getY(), e.getZ(), 0f, 0f);
         }
         if (armState == 5) {
             if (e instanceof ServerPlayerEntity) {
-                ((ServerPlayerEntity)e).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(e.getEntityId(), new Vec3d(-5000d, 50d, -5000d).multiply(placementDirectionVec3d())));
+                ((ServerPlayerEntity) e).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(e.getEntityId(),
+                        new Vec3d(-5000d, 50d, -5000d).multiply(placementDirectionVec3d())));
             } else {
-                //e.setVelocity(0d, 5d, -10d);
+                // e.setVelocity(0d, 5d, -10d);
                 e.setVelocity(new Vec3d(-8d, 4d, -8d).multiply(placementDirectionVec3d()));
                 e.velocityDirty = true;
             }
@@ -181,7 +191,7 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
         } else if (placementDirection == 3) {
             return new Vec3d(0d, 1d, -1d);
         } else {
-            //Unreachable,      hopefully
+            // Unreachable, hopefully
             return null;
         }
     }
