@@ -116,7 +116,7 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
         }
 
         if (hasEntityToThrow) {
-            System.out.println(this.world);
+            //System.out.println(this.world);
             Entity e = (((ServerWorld) this.world).getEntity(entityToThrow));
             if (e != null) {
                 updateEntity(e);
@@ -145,7 +145,7 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
                     this.pos.getZ() - entityLocationCacheXY[armState][0] + 1);
         }
 
-        System.out.println(e);
+        //System.out.println(e);
 
         if (e instanceof ServerPlayerEntity) {
             ((ServerPlayerEntity) e).networkHandler.requestTeleport(e.getX(), e.getY(), e.getZ(), 0f, 0f);

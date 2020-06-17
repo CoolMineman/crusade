@@ -45,7 +45,7 @@ public class PlayerEntityMixin {
         if (coolDownHacksEnabled) {
             coolDownHacksEnabled = false;
             float damageMultiplier = (float) averageSpeed();
-            System.out.println(damageMultiplier);
+            //System.out.println(damageMultiplier);
             cb.setReturnValue(damageMultiplier);
         }
     }
