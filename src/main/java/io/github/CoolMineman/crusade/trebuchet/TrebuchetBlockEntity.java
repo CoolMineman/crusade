@@ -2,13 +2,10 @@ package io.github.CoolMineman.crusade.trebuchet;
 
 import java.util.UUID;
 
-import com.mojang.datafixers.optics.Lens.Box;
-
 import io.github.CoolMineman.crusade.CrusadeMod;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
