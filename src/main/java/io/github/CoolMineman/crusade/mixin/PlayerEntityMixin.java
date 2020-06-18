@@ -13,8 +13,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 
 @Mixin(PlayerEntity.class)
@@ -45,7 +43,6 @@ public class PlayerEntityMixin {
         if (coolDownHacksEnabled) {
             coolDownHacksEnabled = false;
             float damageMultiplier = (float) averageSpeed();
-            //System.out.println(damageMultiplier);
             cb.setReturnValue(damageMultiplier);
         }
     }

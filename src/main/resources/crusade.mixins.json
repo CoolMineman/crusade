@@ -9,7 +9,6 @@
     "BucketItemAccesser"
   ],
   "client": [
-    "ExampleMixin",
     "Savemefromthisdirtyhack",
     "HandRenderMixin",
     "ModelElementMixin"
