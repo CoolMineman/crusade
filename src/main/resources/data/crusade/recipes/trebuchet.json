@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "EEE",
+        "SEE",
+        "EEE"
+    ],
+    "key": {
+        "E": {
+            "tag": "planks"
+        },
+        "S": {
+            "item": "furnace"
+        }
+    },
+    "result": {
+        "item": "crusade:trebuchet",
+        "count": 1
+    }
+}
