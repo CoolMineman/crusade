@@ -46,3 +46,7 @@ GNU VULT!
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+## Credits
+
+[https://github.com/CoolMineman/crusade/blob/master/CREDITS.md](https://github.com/CoolMineman/crusade/blob/master/CREDITS.md)
