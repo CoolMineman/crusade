@@ -36,7 +36,7 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
             BlockHitResult hit) {
         if (world.isClient)
-            return ActionResult.PASS;
+            return ActionResult.CONSUME;
 
         BlockEntity be = world.getBlockEntity(pos);
         if (be != null && be instanceof TrebuchetBlockEntity) {
@@ -44,7 +44,7 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
 
             // Don't spawn add new entity if it is already throwing
             if (blockEntity.armState != 0)
-                return ActionResult.PASS;
+                return ActionResult.CONSUME;
 
             if (player.getMainHandStack().isEmpty()) {
                 blockEntity.hasEntityToThrow = true;
@@ -67,7 +67,8 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
                 world.spawnEntity(e);
                 blockEntity.hasEntityToThrow = true;
                 blockEntity.entityToThrow = e.getUuid();
-                player.getMainHandStack().decrement(1);
+                if (!player.isCreative())
+                    player.getMainHandStack().decrement(1);
             }
         } else {
             System.out.println(":irritater:");
