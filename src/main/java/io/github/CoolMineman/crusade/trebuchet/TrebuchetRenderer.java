@@ -4,12 +4,18 @@ import io.github.CoolMineman.crusade.CrusadeMod;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.entity.ItemFrameEntityRenderer;
+import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.util.math.Matrix4f;
 
 public class TrebuchetRenderer extends BlockEntityRenderer<TrebuchetBlockEntity> {
     private static BlockState[] bases = {CrusadeMod.TREBUCHET_BASE.getDefaultState().with(BaseTrebuchetBlock.EPIC, 1),
@@ -71,5 +77,27 @@ public class TrebuchetRenderer extends BlockEntityRenderer<TrebuchetBlockEntity>
                     matrices.translate(-i, -k, -j);
                 }
         matrices.pop();
+        renderLabelIfPresent(blockEntity, new LiteralText("Load Players And Blocks Here"), matrices, vertexConsumers, light);
+    }
+
+    protected void renderLabelIfPresent(TrebuchetBlockEntity entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        double d = this.dispatcher.camera.getBlockPos().getSquaredDistance(entity.getPos());
+        if (d <= 4096.0D) {
+            float offset = 0.5F;
+            int yOffset = 0;
+            matrices.push();
+            matrices.translate(offset, offset, offset);
+            matrices.multiply(this.dispatcher.camera.getRotation());
+            matrices.scale(-0.025F, -0.025F, 0.025F);
+            Matrix4f matrix4f = matrices.peek().getModel();
+            float g = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25F);
+            int j = (int)(g * 255.0F) << 24;
+            TextRenderer textRenderer = this.dispatcher.getTextRenderer();
+            float h = (float)(-textRenderer.getWidth(text) / 2);
+            textRenderer.draw(text, h, (float)yOffset, 553648127, false, matrix4f, vertexConsumers, true, j, light);
+            textRenderer.draw(text, h, (float)yOffset, -1, false, matrix4f, vertexConsumers, false, 0, light);
+
+            matrices.pop();
+        }
     }
 }

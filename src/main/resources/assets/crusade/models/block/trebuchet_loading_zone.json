@@ -1,6 +1,5 @@
 {
-    "parent": "block/glass",
     "textures": {
-        "all": "crusade:block/trebuchet_loading_zone"
+        "particle": "crusade:block/trebuchet_loading_zone"
     }
 }
