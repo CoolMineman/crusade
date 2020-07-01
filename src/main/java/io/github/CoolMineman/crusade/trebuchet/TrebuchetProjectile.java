@@ -8,19 +8,19 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.MobEntityWithAi;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
-public class TrebuchetProjectile extends MobEntityWithAi {
+public class TrebuchetProjectile extends PathAwareEntity {
     private boolean hasExploaded = false;
     //NOT OPTIONAL
     private static final TrackedData<Optional<BlockState>> BLOCK = DataTracker.registerData(TrebuchetProjectile.class, TrackedDataHandlerRegistry.OPTIONAL_BLOCK_STATE);
 
-    public TrebuchetProjectile(EntityType<? extends MobEntityWithAi> entityType, World world) {
+    public TrebuchetProjectile(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
     }
 

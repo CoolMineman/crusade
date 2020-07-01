@@ -128,6 +128,10 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
     }
 
     private void updateEntity(Entity e) {
+        if (e.hasVehicle()) {
+            e.stopRiding();
+        }
+
         if (placementDirection == 0) {
             e.updatePosition(this.pos.getX() + 0.25, this.pos.getY() + entityLocationCacheXY[armState][1],
                     this.pos.getZ() + entityLocationCacheXY[armState][0]);
