@@ -58,7 +58,9 @@ public class PlayerEntityMixin {
     public void tick(CallbackInfo cb) {
         updateSpeedBuffer();
         if (CrusadeMod.LANCES.contains( ((PlayerEntity)(Object)this).getMainHandStack().getItem() ) && ((PlayerEntity)(Object)this).hasVehicle()) {
-            for (Entity e : ((PlayerEntity)(Object)this).world.getEntities(null, new Box(((PlayerEntity)(Object)this).getPos().subtract(5, 5, 5), ((PlayerEntity)(Object)this).getPos().add(5, 5, 5)))) {
+            for (Entity e : ((PlayerEntity)(Object)this).world.getOtherEntities(null,
+                    new Box(((PlayerEntity) (Object) this).getPos().subtract(5, 5, 5),
+                            ((PlayerEntity) (Object) this).getPos().add(5, 5, 5)))) {
                 if (e.equals(((PlayerEntity)(Object)this).getVehicle()))
                     continue;
                 if ((e.equals((PlayerEntity)(Object)this)))
