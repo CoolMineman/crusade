@@ -3,13 +3,13 @@
   "id": "crusade",
   "version": "${version}",
 
-  "name": "Crudade Mod",
+  "name": "Crusade",
   "description": "D E U S   V U L T!",
   "authors": [
     "CoolMineman/ThatTrollzer/Cool_Mineman/Whatever I am now ;P"
   ],
   "contact": {
-    "homepage": "N O",
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/crusade",
     "sources": "https://github.com/CoolMineman/crusade"
   },
 
@@ -33,8 +33,5 @@
     "fabricloader": "*",
     "fabric": "*",
     "minecraft": "*"
-  },
-  "suggests": {
-    "flamingo": "*"
   }
 }
