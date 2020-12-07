@@ -27,6 +27,7 @@ import net.minecraft.util.registry.Registry;
 
 public class CrusadeMod implements ModInitializer {
 	public static final ArmorItem GREAT_HELM = new ArmorItem(new GreatHelmMaterialEpic(), EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.MISC));
+	public static final ArmorItem GREAT_HELM_CHRISTMAS = new ArmorItem(new GreatHelmMaterialEpic(), EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.MISC));
 	public static final Item WOOD_LANCE = new LanceItem(ToolMaterials.WOOD, 4, 0, new Item.Settings().group(ItemGroup.MISC));
 	public static final Item STONE_LANCE = new LanceItem(ToolMaterials.STONE, 4, 0, new Item.Settings().group(ItemGroup.MISC));
 	public static final Item IRON_LANCE = new LanceItem(ToolMaterials.IRON, 4, 0, new Item.Settings().group(ItemGroup.MISC));
@@ -61,6 +62,7 @@ public class CrusadeMod implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		Registry.register(Registry.ITEM, new Identifier("crusade", "great_helm"), GREAT_HELM);
+		Registry.register(Registry.ITEM, new Identifier("crusade", "great_helm_christmas"), GREAT_HELM_CHRISTMAS);
 		Registry.register(Registry.ITEM, new Identifier("crusade", "wood_lance"), WOOD_LANCE);
 		Registry.register(Registry.ITEM, new Identifier("crusade", "stone_lance"), STONE_LANCE);
 		Registry.register(Registry.ITEM, new Identifier("crusade", "iron_lance"), IRON_LANCE);

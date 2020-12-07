@@ -32,7 +32,7 @@ public class Savemefromthisdirtyhack {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, LivingEntity livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo cb) {
         ItemStack itemStack = livingEntity.getEquippedStack(EquipmentSlot.HEAD);
-        if (!(itemStack.isEmpty()) && itemStack.getItem() == CrusadeMod.GREAT_HELM) {
+        if (!(itemStack.isEmpty()) && (itemStack.getItem() == CrusadeMod.GREAT_HELM || itemStack.getItem() == CrusadeMod.GREAT_HELM_CHRISTMAS)) {
             matrixStack.push();
             matrixStack.scale(this.field_24474, this.field_24475, this.field_24476);
             boolean bl = livingEntity instanceof VillagerEntity || livingEntity instanceof ZombieVillagerEntity;

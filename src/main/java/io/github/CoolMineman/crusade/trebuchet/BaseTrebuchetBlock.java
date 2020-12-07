@@ -63,7 +63,7 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
                 Block a = ((BlockItem) player.getMainHandStack().getItem()).getBlock();
                 TrebuchetProjectile e = new TrebuchetProjectile(CrusadeMod.TREBUCHET_PROJECTILE, world);
                 e.setTheBlockState(a.getDefaultState());
-                e.setPos(be.getPos().getX(), -5, be.getPos().getZ()); // Hacky Code To Make Enitity exist
+                e.setPos(be.getPos().getX(), -5, be.getPos().getZ()); // Hacky Code To Make Entity exist
                 world.spawnEntity(e);
                 blockEntity.hasEntityToThrow = true;
                 blockEntity.entityToThrow = e.getUuid();

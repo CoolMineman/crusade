@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "RWR",
+        "RHR",
+        "RRR"
+    ],
+    "key": {
+        "R": {
+            "item": "red_dye"
+        },
+        "W": {
+            "item": "bone_meal"
+        },
+        "H": {
+            "item": "crusade:great_helm"
+        }
+    },
+    "result": {
+        "item": "crusade:great_helm_christmas",
+        "count": 1
+    }
+}
