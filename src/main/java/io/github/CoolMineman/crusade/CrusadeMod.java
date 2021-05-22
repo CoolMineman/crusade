@@ -32,7 +32,7 @@ public class CrusadeMod implements ModInitializer {
 	public static final Item STONE_LANCE = new LanceItem(ToolMaterials.STONE, 4, 0, new Item.Settings().group(ItemGroup.MISC));
 	public static final Item IRON_LANCE = new LanceItem(ToolMaterials.IRON, 4, 0, new Item.Settings().group(ItemGroup.MISC));
 	public static final Item DIAMOND_LANCE = new LanceItem(ToolMaterials.DIAMOND, 4, 0, new Item.Settings().group(ItemGroup.MISC));
-	public static final Item NETHERITE_LANCE = new LanceItem(ToolMaterials.NETHERITE, 4, 0, new Item.Settings().group(ItemGroup.MISC));
+	public static final Item NETHERITE_LANCE = new LanceItem(ToolMaterials.NETHERITE, 4, 0, new Item.Settings().group(ItemGroup.MISC).fireproof());
 
 
 	public static ArrayList<Item> LANCES = new ArrayList<>();
