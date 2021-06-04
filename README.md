@@ -50,3 +50,7 @@ GNU VULT!
 ## Credits
 
 [https://github.com/CoolMineman/crusade/blob/master/CREDITS.md](https://github.com/CoolMineman/crusade/blob/master/CREDITS.md)
+
+## Discord
+
+[![Join The Discord](https://discordapp.com/api/guilds/844335788384452619/widget.png?style=banner2)](https://discord.gg/ZfNH3BUVth)
