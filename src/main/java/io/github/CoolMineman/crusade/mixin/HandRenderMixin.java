@@ -13,7 +13,7 @@ import net.minecraft.util.Arm;
 
 @Mixin(BipedEntityModel.class)
 public class HandRenderMixin {
-    @Inject(method = "setAngles", at = @At(value = "INVOKE", target = "net/minecraft/client/render/entity/model/BipedEntityModel.method_29353(Lnet/minecraft/entity/LivingEntity;F)V"))
+    @Inject(method = "setAngles", at = @At(value = "INVOKE", target = "net/minecraft/client/render/entity/model/BipedEntityModel.animateArms(Lnet/minecraft/entity/LivingEntity;F)V"))
     public void setAngles(LivingEntity livingEntity, float f, float g, float h, float i, float j, CallbackInfo epic) {
         //todo Other mobs?
         if (!(livingEntity instanceof PlayerEntity))

@@ -7,14 +7,14 @@ import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Tickable;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
-public class TrebuchetBlockEntity extends BlockEntity implements Tickable, BlockEntityClientSerializable {
+public class TrebuchetBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
     private static final Double[][] entityLocationCacheXY = { { 4d, 6d }, { 4d, 10d }, { 3d, 14d }, { 1d, 17.5d },
             { -3d, 19d }, { -6.5d, 21d }, };
 
@@ -24,13 +24,13 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
     public boolean hasEntityToThrow = false;
     public UUID entityToThrow = null;
 
-    public TrebuchetBlockEntity() {
-        super(CrusadeMod.TREBUCHET_ENTITY);
+    public TrebuchetBlockEntity(BlockPos pos, BlockState state) {
+        super(CrusadeMod.TREBUCHET_ENTITY, pos, state);
     }
 
     @Override
-    public CompoundTag toTag(CompoundTag tag) {
-        super.toTag(tag);
+    public NbtCompound writeNbt(NbtCompound tag) {
+        super.writeNbt(tag);
 
         // Save the current value of the number to the tag
         tag.putInt("armState", armState);
@@ -45,8 +45,8 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
 
     // Deserialize the BlockEntity
     @Override
-    public void fromTag(BlockState state, CompoundTag tag) {
-        super.fromTag(state, tag);
+    public void readNbt(NbtCompound tag) {
+        super.readNbt(tag);
         armState = tag.getInt("armState");
         placementDirection = tag.getInt("placementDirection");
         hasEntityToThrow = tag.getBoolean("hasEntityToThrow");
@@ -58,7 +58,6 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
 
     int tickCounter = 0;
 
-    @Override
     public void tick() {
         if (!(this.world instanceof ServerWorld))
             return;
@@ -133,16 +132,16 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
         }
 
         if (placementDirection == 0) {
-            e.updatePosition(this.pos.getX() + 0.25, this.pos.getY() + entityLocationCacheXY[armState][1],
+            e.setPosition(this.pos.getX() + 0.25, this.pos.getY() + entityLocationCacheXY[armState][1],
                     this.pos.getZ() + entityLocationCacheXY[armState][0]);
         } else if (placementDirection == 1) {
-            e.updatePosition(this.pos.getX() + entityLocationCacheXY[armState][0],
+            e.setPosition(this.pos.getX() + entityLocationCacheXY[armState][0],
                     this.pos.getY() + entityLocationCacheXY[armState][1], this.pos.getZ() + 0.75);
         } else if (placementDirection == 2) {
-            e.updatePosition(this.pos.getX() - entityLocationCacheXY[armState][0] + 1,
+            e.setPosition(this.pos.getX() - entityLocationCacheXY[armState][0] + 1,
                     this.pos.getY() + entityLocationCacheXY[armState][1], this.pos.getZ() + 0.25);
         } else if (placementDirection == 3) {
-            e.updatePosition(this.pos.getX() + 0.25, this.pos.getY() + entityLocationCacheXY[armState][1],
+            e.setPosition(this.pos.getX() + 0.25, this.pos.getY() + entityLocationCacheXY[armState][1],
                     this.pos.getZ() - entityLocationCacheXY[armState][0] + 1);
         }
 
@@ -153,7 +152,7 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
         }
         if (armState == 5) {
             if (e instanceof ServerPlayerEntity) {
-                ((ServerPlayerEntity) e).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(e.getEntityId(),
+                ((ServerPlayerEntity) e).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(e.getId(),
                         new Vec3d(-5000d, 50d, -5000d).multiply(placementDirectionVec3d())));
             } else {
                 // e.setVelocity(0d, 5d, -10d);
@@ -166,13 +165,13 @@ public class TrebuchetBlockEntity extends BlockEntity implements Tickable, Block
     }
 
     @Override
-    public void fromClientTag(CompoundTag tag) {
-        this.fromTag(null, tag);
+    public void fromClientTag(NbtCompound tag) {
+        this.readNbt(tag);
     }
 
     @Override
-    public CompoundTag toClientTag(CompoundTag tag) {
-        return this.toTag(tag);
+    public NbtCompound toClientTag(NbtCompound tag) {
+        return this.writeNbt(tag);
     }
 
     public void setArmState(int i) {

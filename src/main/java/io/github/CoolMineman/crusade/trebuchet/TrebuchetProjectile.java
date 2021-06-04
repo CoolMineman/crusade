@@ -2,6 +2,7 @@ package io.github.CoolMineman.crusade.trebuchet;
 
 import java.util.Optional;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -9,7 +10,8 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtHelper;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -25,17 +27,24 @@ public class TrebuchetProjectile extends PathAwareEntity {
     }
 
     @Override
-    public void writeCustomDataToTag(CompoundTag tag) {
-        super.writeCustomDataToTag(tag);
-        tag.putString("blockid", dataTracker.get(BLOCK).get().getBlock().toString());
+    public void writeCustomDataToNbt(NbtCompound tag) {
+        super.writeCustomDataToNbt(tag);
+        tag.put("blockid2", NbtHelper.fromBlockState(dataTracker.get(BLOCK).orElseGet(Blocks.AIR::getDefaultState)));
     }
 
     @Override
-    public void readCustomDataFromTag(CompoundTag tag) {
-        super.readCustomDataFromTag(tag);
-        dataTracker.set(BLOCK, Optional.of(Registry.BLOCK.get((new Identifier(tag.getString("blockid")))).getDefaultState()));
+    public void readCustomDataFromNbt(NbtCompound tag) {
+        super.readCustomDataFromNbt(tag);
+        BlockState state;
+        if (tag.contains("blockid")) {
+            state = Registry.BLOCK.get((new Identifier(tag.getString("blockid")))).getDefaultState();
+        } else {
+            state = NbtHelper.toBlockState(tag.getCompound("blockid2"));
+        }
+        setTheBlockState(state);
     }
 
+    //Had to move the startTracking here or else it wouldn't track propperly for a half second
     public void setTheBlockState(BlockState e) {
         dataTracker.set(BLOCK, Optional.of(e));
     }

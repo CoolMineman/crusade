@@ -10,8 +10,6 @@ public class ClientCrusadeMod implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockEntityRendererRegistry.INSTANCE.register(CrusadeMod.TREBUCHET_ENTITY, TrebuchetRenderer::new);
-        EntityRendererRegistry.INSTANCE.register(CrusadeMod.TREBUCHET_PROJECTILE, (dispatcher, context) -> {
-            return new TrebuchetProjectileRenderer(dispatcher);
-        });
+        EntityRendererRegistry.INSTANCE.register(CrusadeMod.TREBUCHET_PROJECTILE, TrebuchetProjectileRenderer::new);
     }
 }

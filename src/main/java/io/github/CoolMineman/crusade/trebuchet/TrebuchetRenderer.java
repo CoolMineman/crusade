@@ -9,13 +9,14 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Matrix4f;
+import net.minecraft.util.math.Vec3f;
 
-public class TrebuchetRenderer extends BlockEntityRenderer<TrebuchetBlockEntity> {
+public class TrebuchetRenderer implements BlockEntityRenderer<TrebuchetBlockEntity> {
     private static BlockState[] bases = {CrusadeMod.TREBUCHET_BASE.getDefaultState().with(BaseTrebuchetBlock.EPIC, 1),
         CrusadeMod.TREBUCHET_BASE.getDefaultState().with(BaseTrebuchetBlock.EPIC, 2),
         CrusadeMod.TREBUCHET_BASE.getDefaultState().with(BaseTrebuchetBlock.EPIC, 3),
@@ -24,9 +25,13 @@ public class TrebuchetRenderer extends BlockEntityRenderer<TrebuchetBlockEntity>
         CrusadeMod.TREBUCHET_BASE.getDefaultState().with(BaseTrebuchetBlock.EPIC, 6)};
     
     private static float[][] counterweightxy = {{-10.5f, 10f}, {-10.5f, 9f}, {-10.5f, 7.5f}, {-10f, 6.5f}, {-8.5f, 6f}, {-7.25f, 5f}};
+
+    private final BlockEntityRenderDispatcher dispatcher;
+    private final TextRenderer textRenderer;
  
-    public TrebuchetRenderer(BlockEntityRenderDispatcher dispatcher) {
-        super(dispatcher);
+    public TrebuchetRenderer(BlockEntityRendererFactory.Context ctx) {
+        this.dispatcher = ctx.getRenderDispatcher();
+        this.textRenderer = ctx.getTextRenderer();
     }
  
     @Override
@@ -41,13 +46,13 @@ public class TrebuchetRenderer extends BlockEntityRenderer<TrebuchetBlockEntity>
         matrices.push();
         if (renderDirection == 1) {
             matrices.translate(0f, 0, 1f);
-            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90f));
+            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90f));
         } else if (renderDirection == 2) {
-            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90f));
-            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180f));
+            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(90f));
+            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180f));
             matrices.translate(0f, 0, -1f);
         } else if (renderDirection == 3) {
-            matrices.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180f));
+            matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180f));
             matrices.translate(-1f, 0, -1f);
         }
         matrices.translate(-3.25, 0, -3f);
@@ -90,8 +95,7 @@ public class TrebuchetRenderer extends BlockEntityRenderer<TrebuchetBlockEntity>
             Matrix4f matrix4f = matrices.peek().getModel();
             float g = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25F);
             int j = (int)(g * 255.0F) << 24;
-            TextRenderer textRenderer = this.dispatcher.getTextRenderer();
-            float h = (float)(-textRenderer.getWidth(text) / 2);
+            float h = (float)(-textRenderer.getWidth(text) / 2.0);
             textRenderer.draw(text, h, (float)yOffset, 553648127, false, matrix4f, vertexConsumers, true, j, light);
             textRenderer.draw(text, h, (float)yOffset, -1, false, matrix4f, vertexConsumers, false, 0, light);
 

@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,6 +33,11 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
         super(settings);
         setDefaultState(getStateManager().getDefaultState().with(EPIC, 0));
     }
+    
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return checkType(type, CrusadeMod.TREBUCHET_ENTITY, (w, p, s, e) -> e.tick());
+    }
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand,
@@ -39,7 +46,7 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
             return ActionResult.CONSUME;
 
         BlockEntity be = world.getBlockEntity(pos);
-        if (be != null && be instanceof TrebuchetBlockEntity) {
+        if (be instanceof TrebuchetBlockEntity) {
             TrebuchetBlockEntity blockEntity = (TrebuchetBlockEntity) be;
 
             // Don't spawn add new entity if it is already throwing
@@ -82,8 +89,8 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
     }
 
     @Override
-    public BlockEntity createBlockEntity(BlockView world) {
-        return new TrebuchetBlockEntity();
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new TrebuchetBlockEntity(pos, state);
     }
 
     @Override
@@ -94,5 +101,9 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
     @Override
     public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
         return true;
+    }
+
+    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> checkType(BlockEntityType<A> givenType, BlockEntityType<E> expectedType, BlockEntityTicker<? super E> ticker) {
+        return expectedType == givenType ? (BlockEntityTicker<A>) ticker : null;
     }
 }

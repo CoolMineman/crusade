@@ -11,12 +11,12 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.HeadFeatureRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.ZombieVillagerEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.client.render.entity.model.ModelWithHead;
 import net.minecraft.client.render.model.json.ModelTransformation;
 
@@ -38,7 +38,7 @@ public class Savemefromthisdirtyhack {
             boolean bl = livingEntity instanceof VillagerEntity || livingEntity instanceof ZombieVillagerEntity;
             ((ModelWithHead)((HeadFeatureRenderer)(Object)this).getContextModel()).getHead().rotate(matrixStack);
             matrixStack.translate(0.0D, -0.25D, 0.0D);
-            matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
+            matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(180.0F));
             matrixStack.scale(0.625F, -0.625F, -0.625F);
             if (bl) {
                matrixStack.translate(0.0D, 0.1875D, 0.0D);

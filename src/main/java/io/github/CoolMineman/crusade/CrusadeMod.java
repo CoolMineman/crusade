@@ -7,6 +7,7 @@ import io.github.CoolMineman.crusade.trebuchet.TrebuchetBlockEntity;
 import io.github.CoolMineman.crusade.trebuchet.TrebuchetItem;
 import io.github.CoolMineman.crusade.trebuchet.TrebuchetProjectile;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Block;
@@ -72,7 +73,7 @@ public class CrusadeMod implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier("crusade", "trebuchet"), TREBUCHET_ITEM);
 
 		Registry.register(Registry.BLOCK, new Identifier("crusade", "dontusethisitisinternal1"), TREBUCHET_BASE);
-		TREBUCHET_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "crusade:dontusethisitisinternal1", BlockEntityType.Builder.create(TrebuchetBlockEntity::new, TREBUCHET_BASE).build(null));
+		TREBUCHET_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "crusade:dontusethisitisinternal1", FabricBlockEntityTypeBuilder.create(TrebuchetBlockEntity::new, TREBUCHET_BASE).build(null));
 		FabricDefaultAttributeRegistry.register(TREBUCHET_PROJECTILE, MobEntity.createMobAttributes());
 		System.out.println("DEUS VULT!");
 	}
