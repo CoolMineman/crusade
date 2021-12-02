@@ -27,13 +27,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class CrusadeMod implements ModInitializer {
-	public static final ArmorItem GREAT_HELM = new ArmorItem(new GreatHelmMaterialEpic(), EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.MISC));
-	public static final ArmorItem GREAT_HELM_CHRISTMAS = new ArmorItem(new GreatHelmMaterialEpic(), EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.MISC));
-	public static final Item WOOD_LANCE = new LanceItem(ToolMaterials.WOOD, 4, 0, new Item.Settings().group(ItemGroup.MISC));
-	public static final Item STONE_LANCE = new LanceItem(ToolMaterials.STONE, 4, 0, new Item.Settings().group(ItemGroup.MISC));
-	public static final Item IRON_LANCE = new LanceItem(ToolMaterials.IRON, 4, 0, new Item.Settings().group(ItemGroup.MISC));
-	public static final Item DIAMOND_LANCE = new LanceItem(ToolMaterials.DIAMOND, 4, 0, new Item.Settings().group(ItemGroup.MISC));
-	public static final Item NETHERITE_LANCE = new LanceItem(ToolMaterials.NETHERITE, 4, 0, new Item.Settings().group(ItemGroup.MISC).fireproof());
+	public static final ArmorItem GREAT_HELM = new ArmorItem(new GreatHelmMaterialEpic(), EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
+	public static final ArmorItem GREAT_HELM_CHRISTMAS = new ArmorItem(new GreatHelmMaterialEpic(), EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
+	public static final Item WOOD_LANCE = new LanceItem(ToolMaterials.WOOD, 4, 0, new Item.Settings().group(ItemGroup.COMBAT));
+	public static final Item STONE_LANCE = new LanceItem(ToolMaterials.STONE, 4, 0, new Item.Settings().group(ItemGroup.COMBAT));
+	public static final Item IRON_LANCE = new LanceItem(ToolMaterials.IRON, 4, 0, new Item.Settings().group(ItemGroup.COMBAT));
+	public static final Item DIAMOND_LANCE = new LanceItem(ToolMaterials.DIAMOND, 4, 0, new Item.Settings().group(ItemGroup.COMBAT));
+	public static final Item NETHERITE_LANCE = new LanceItem(ToolMaterials.NETHERITE, 4, 0, new Item.Settings().group(ItemGroup.COMBAT).fireproof());
 
 
 	public static ArrayList<Item> LANCES = new ArrayList<>();
@@ -49,7 +49,7 @@ public class CrusadeMod implements ModInitializer {
 	public static BlockEntityType<TrebuchetBlockEntity> TREBUCHET_ENTITY;
 
 
-	public static final Item TREBUCHET_ITEM = new TrebuchetItem(TREBUCHET_BASE, new Item.Settings().group(ItemGroup.MISC));
+	public static final Item TREBUCHET_ITEM = new TrebuchetItem(TREBUCHET_BASE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
 	public static final EntityType<TrebuchetProjectile> TREBUCHET_PROJECTILE = Registry.register(
 		Registry.ENTITY_TYPE,

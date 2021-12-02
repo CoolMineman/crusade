@@ -3,18 +3,20 @@ package io.github.CoolMineman.crusade.trebuchet;
 import java.util.UUID;
 
 import io.github.CoolMineman.crusade.CrusadeMod;
-import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.Packet;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
-public class TrebuchetBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
+public class TrebuchetBlockEntity extends BlockEntity {
     private static final Double[][] entityLocationCacheXY = { { 4d, 6d }, { 4d, 10d }, { 3d, 14d }, { 1d, 17.5d },
             { -3d, 19d }, { -6.5d, 21d }, };
 
@@ -29,7 +31,7 @@ public class TrebuchetBlockEntity extends BlockEntity implements BlockEntityClie
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound tag) {
+    public void writeNbt(NbtCompound tag) {
         super.writeNbt(tag);
 
         // Save the current value of the number to the tag
@@ -39,8 +41,6 @@ public class TrebuchetBlockEntity extends BlockEntity implements BlockEntityClie
         if (hasEntityToThrow) {
             tag.putUuid("entityToThrow", entityToThrow);
         }
-
-        return tag;
     }
 
     // Deserialize the BlockEntity
@@ -164,21 +164,21 @@ public class TrebuchetBlockEntity extends BlockEntity implements BlockEntityClie
         }
     }
 
-    @Override
-    public void fromClientTag(NbtCompound tag) {
-        this.readNbt(tag);
-    }
-
-    @Override
-    public NbtCompound toClientTag(NbtCompound tag) {
-        return this.writeNbt(tag);
-    }
-
     public void setArmState(int i) {
         if (this.armState != i) {
             this.armState = i;
-            this.sync();
+            ((ServerWorld) world).getChunkManager().markForUpdate(getPos());
         }
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return this.createNbt();
     }
 
     public Vec3d placementDirectionVec3d() {

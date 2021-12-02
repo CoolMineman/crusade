@@ -33,6 +33,11 @@ public class TrebuchetRenderer implements BlockEntityRenderer<TrebuchetBlockEnti
         this.dispatcher = ctx.getRenderDispatcher();
         this.textRenderer = ctx.getTextRenderer();
     }
+
+    @Override
+    public int getRenderDistance() {
+        return 256;
+    }
  
     @Override
     public void render(TrebuchetBlockEntity blockEntity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
@@ -92,7 +97,7 @@ public class TrebuchetRenderer implements BlockEntityRenderer<TrebuchetBlockEnti
             matrices.translate(offset, offset, offset);
             matrices.multiply(this.dispatcher.camera.getRotation());
             matrices.scale(-0.025F, -0.025F, 0.025F);
-            Matrix4f matrix4f = matrices.peek().getModel();
+            Matrix4f matrix4f = matrices.peek().getPositionMatrix();
             float g = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25F);
             int j = (int)(g * 255.0F) << 24;
             float h = (float)(-textRenderer.getWidth(text) / 2.0);

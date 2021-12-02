@@ -1,9 +1,7 @@
-# gradle
+# brachyura
 
-.gradle/
-build/
-out/
-classes/
+.brachyura/
+build
 
 # eclipse
 

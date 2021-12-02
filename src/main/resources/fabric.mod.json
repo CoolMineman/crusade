@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "crusade",
-  "version": "${version}",
+  "version": "1.2.5",
 
   "name": "Crusade",
   "description": "D E U S   V U L T!",
@@ -31,7 +31,6 @@
 
   "depends": {
     "fabricloader": "*",
-    "fabric": "*",
     "minecraft": "*"
   }
 }

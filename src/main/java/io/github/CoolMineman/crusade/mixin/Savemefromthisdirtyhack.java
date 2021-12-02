@@ -23,18 +23,18 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 @Mixin(HeadFeatureRenderer.class)
 public class Savemefromthisdirtyhack {
     @Shadow
-    private float field_24474;
+    private float scaleX;
     @Shadow
-    private float field_24475;
+    private float scaleY;
     @Shadow
-    private float field_24476;
+    private float scaleZ;
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, LivingEntity livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo cb) {
         ItemStack itemStack = livingEntity.getEquippedStack(EquipmentSlot.HEAD);
         if (!(itemStack.isEmpty()) && (itemStack.getItem() == CrusadeMod.GREAT_HELM || itemStack.getItem() == CrusadeMod.GREAT_HELM_CHRISTMAS)) {
             matrixStack.push();
-            matrixStack.scale(this.field_24474, this.field_24475, this.field_24476);
+            matrixStack.scale(this.scaleX, this.scaleY, this.scaleZ);
             boolean bl = livingEntity instanceof VillagerEntity || livingEntity instanceof ZombieVillagerEntity;
             ((ModelWithHead)((HeadFeatureRenderer)(Object)this).getContextModel()).getHead().rotate(matrixStack);
             matrixStack.translate(0.0D, -0.25D, 0.0D);
