@@ -58,14 +58,14 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
                 blockEntity.entityToThrow = player.getUuid();
             } else if (player.getMainHandStack().getItem() instanceof BucketItem) {
                 // todo fix
-                Fluid a = ((BucketItemAccesser) player.getMainHandStack().getItem()).getFluid();
-                if (!(a.equals(Fluids.EMPTY))) {
-                    Entity e = new FallingBlockEntity(world, pos.getX(), pos.getY() + 5, pos.getZ(),
-                            a.getDefaultState().getBlockState());
-                    world.spawnEntity(e);
-                    blockEntity.hasEntityToThrow = true;
-                    blockEntity.entityToThrow = e.getUuid();
-                }
+                // Fluid a = ((BucketItemAccesser) player.getMainHandStack().getItem()).getFluid();
+                // if (!(a.equals(Fluids.EMPTY))) {
+                //     Entity e = new FallingBlockEntity(world, pos.getX(), pos.getY() + 5, pos.getZ(),
+                //             a.getDefaultState().getBlockState());
+                //     world.spawnEntity(e);
+                //     blockEntity.hasEntityToThrow = true;
+                //     blockEntity.entityToThrow = e.getUuid();
+                // }
             } else if (player.getMainHandStack().getItem() instanceof BlockItem) {
                 Block a = ((BlockItem) player.getMainHandStack().getItem()).getBlock();
                 TrebuchetProjectile e = new TrebuchetProjectile(CrusadeMod.TREBUCHET_PROJECTILE, world);
@@ -77,8 +77,6 @@ public class BaseTrebuchetBlock extends Block implements BlockEntityProvider {
                 if (!player.isCreative())
                     player.getMainHandStack().decrement(1);
             }
-        } else {
-            System.out.println(":irritater:");
         }
         return ActionResult.SUCCESS;
     }
