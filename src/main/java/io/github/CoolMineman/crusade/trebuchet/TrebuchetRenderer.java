@@ -11,7 +11,6 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderDispatcher;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3f;
@@ -85,7 +84,7 @@ public class TrebuchetRenderer implements BlockEntityRenderer<TrebuchetBlockEnti
                     matrices.translate(-i, -k, -j);
                 }
         matrices.pop();
-        renderLabelIfPresent(blockEntity, new LiteralText("Load Players And Blocks Here"), matrices, vertexConsumers, light);
+        renderLabelIfPresent(blockEntity, Text.literal("Load Players And Blocks Here"), matrices, vertexConsumers, light);
     }
 
     protected void renderLabelIfPresent(TrebuchetBlockEntity entity, Text text, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {

@@ -44,7 +44,7 @@ public class Savemefromthisdirtyhack {
                matrixStack.translate(0.0D, 0.1875D, 0.0D);
             }
 
-            MinecraftClient.getInstance().getHeldItemRenderer().renderItem(livingEntity, itemStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, i);
+            MinecraftClient.getInstance().getItemRenderer().renderItem(livingEntity, itemStack, ModelTransformation.Mode.HEAD, false, matrixStack, vertexConsumerProvider, null, i, i, i);
             matrixStack.pop();
             cb.cancel();
         }
